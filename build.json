@@ -1,0 +1,18 @@
+{
+    "android": {
+        "debug": {
+            "keystore": "wszb.keystore",
+            "storePassword": "123456",
+            "alias": "wszb",
+            "password" : "123456",
+            "keystoreType": ""
+        },
+        "release": {
+            "keystore": "wszb.keystore",
+            "storePassword": "123456",
+            "alias": "wszb",
+            "password" : "123456",
+            "keystoreType": ""
+        }
+    }
+}

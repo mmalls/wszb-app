@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle end>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>商品</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>录入进商品信息</ion-list-header>
+
+    <form #form="ngForm">
+      <ion-item>
+        <ion-label color="primary" fixed>商品名称</ion-label>
+        <ion-input type="text" placeholder="请输入商品名称" required clearInput [(ngModel)]="goods.name" name="name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" fixed>进货渠道</ion-label>
+        <ion-select placeholder="请选择进货渠道" required [(ngModel)]="goods.channelId" name="channelId" interface="action-sheet" [compareWith]="compareFn">
+          <ion-option [value]="c.id" *ngFor="let c of channels">{{c.name}}</ion-option>
+        </ion-select>
+        <button ion-button clear item-end icon-right (click)="addChannel()">
+          <ion-icon name="add-circle"></ion-icon>
+        </button>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" fixed>商品种类</ion-label>
+        <ion-input type="text" placeholder="请输入商品种类" required clearInput [(ngModel)]="goods.catalog" name="catalog"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" fixed>计量单位</ion-label>
+        <ion-select placeholder="请选择计量单位" required [(ngModel)]="goods.unit" name="catalog" interface="action-sheet">
+          <ion-option [value]="u" *ngFor="let u of units">{{u}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" fixed>进货价</ion-label>
+        <ion-input type="number" placeholder="请输入商品进货价" required clearInput [(ngModel)]="goods.purchasePrice" name="purchasePrice"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" fixed>零售价</ion-label>
+        <ion-input type="number" placeholder="请输入商品零售价" required clearInput [(ngModel)]="goods.sellPrice" name="sellPrice"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" fixed>备注</ion-label>
+        <ion-textarea type="text" placeholder="请输入备注信息" clearInput [(ngModel)]="goods.intro" name="intro" rows="2"></ion-textarea>
+      </ion-item>
+    </form>
+
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-buttons end>
+    <button ion-button color="secondary" icon-right small (click)="saveItem(form)">保存
+      <ion-icon name="checkmark"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-footer>

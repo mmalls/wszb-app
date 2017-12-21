@@ -1,0 +1,8 @@
+{
+  "name": "小微账本",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

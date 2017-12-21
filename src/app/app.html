@@ -1,0 +1,21 @@
+<ion-menu [content]="content" side="right" type="overlay">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>菜单</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item >
+        我的
+      </button>
+      <button ion-item >
+        锁屏
+      </button>
+      <button ion-item >
+        关于
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-nav #content [root]="rootPage" swipeBackEnabled="false"></ion-nav>

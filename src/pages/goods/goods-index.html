@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle end>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>商品</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-searchbar placeholder="请输入商品名搜索" (ionInput)="filterItems($event)"></ion-searchbar>
+  <ion-list>
+    <ion-list-header>
+      <span>一共有 {{ goods.length }} 件商品</span>
+      <button ion-button clear item-end icon-right (click)="addGoods()">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-list-header>
+    <ion-card *ngFor="let c of goods" (tap)="tapItem(c.id);">
+      <ion-item>
+        <h2>
+          <span>商品名称：</span>
+          <span float-right>{{c.name}}</span>
+        </h2>
+        <h4>销售/单数:
+          <ion-badge float-right>￥{{c.orderSale.toFixed(2)}}/{{c.orderCount}}</ion-badge>
+        </h4>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <p>进货价：￥{{ c.purchasePrice.toFixed(2) }}</p>
+              <p>商品种类：{{ c.catalog }}</p>
+              <p>进货渠道：{{ c.channelName }}</p>
+            </ion-col>
+            <ion-col>
+              <p>零售价：￥{{ c.sellPrice.toFixed(2) }}</p>
+              <p>计量单位：{{ c.unit }}</p>
+              <p *ngIf="c.intro != ''">备注说明：{{c.intro}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+</ion-content>

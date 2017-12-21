@@ -1,0 +1,118 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle end>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>订单</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>录入订单信息</ion-list-header>
+
+    <form #form="ngForm">
+
+      <ion-item>
+        <ion-label color="primary">购买商品件数</ion-label>
+        <ion-input type="number" required readonly [(ngModel)]="goodsNumber" name="goodsNumber"></ion-input>
+        <button ion-button clear item-end icon-left (click)="changeNumber('sub')">
+          <ion-icon name="remove"></ion-icon>
+        </button>
+        <button ion-button clear item-end icon-right (click)="changeNumber('add')">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-item>
+
+      <ion-item-group *ngFor="let g of orderInfo.goods ; index as i">
+        <ion-item-divider color="light">商品 {{g.goodsName}}</ion-item-divider>
+        <ion-item>
+          <ion-label color="primary" fixed>商品名称</ion-label>
+          <ion-select placeholder="请选择购买商品" required [(ngModel)]="g.goodsId" name="goodsId_i" interface="action-sheet" [compareWith]="compareFn">
+            <ion-option [value]="u.id" *ngFor="let u of goods" (ionSelect)="selectGoods(i, u.id)">{{u.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" fixed>计量单位</ion-label>
+          <ion-input type="text" placeholder="选择商品自动关联" [value]="g.unit" readonly name="unit_i"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" fixed>进货价</ion-label>
+          <ion-input type="number" required placeholder="选择商品自动关联" [value]="g.purchasePrice" name="purchasePrice_i" readonly></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" fixed>零售价</ion-label>
+          <ion-input type="number" required placeholder="选择商品自动关联" [value]="g.sellPrice" name="sellPrice_i" readonly></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" fixed>购买数量</ion-label>
+          <ion-input type="number" required readonly [(ngModel)]="g.quantity" name="quantity_{{i}}"></ion-input>
+          <button ion-button clear item-end icon-left (click)="changeQuantity('sub', i)">
+            <ion-icon name="remove"></ion-icon>
+          </button>
+          <button ion-button clear item-end icon-right (click)="changeQuantity('add', i)">
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </ion-item>
+      </ion-item-group>
+
+      <ion-item-group>
+        <ion-item-divider color="light">订单金额</ion-item-divider>
+        <ion-item>
+          <ion-label color="primary" fixed>总售价</ion-label>
+          <ion-input type="number" required placeholder="" [(ngModel)]="orderInfo.order.totalSellPrice" name="totalSellPrice"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" fixed>优惠</ion-label>
+          <ion-input type="number" placeholder="" [(ngModel)]="orderInfo.order.discount" name="discount"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" fixed>备注说明</ion-label>
+          <ion-textarea type="text" placeholder="请输入请输入订单备注" clearInput [(ngModel)]="orderInfo.order.notes" name="notes" rows="3" readonly></ion-textarea>
+        </ion-item>
+      </ion-item-group>
+
+      <ion-item-group>
+        <ion-item-divider color="light">客户信息</ion-item-divider>
+        <ion-item>
+          <ion-label color="primary" fixed>客户名称</ion-label>
+          <ion-select placeholder="请选择客户" required [(ngModel)]="orderInfo.order.customId" name="customId" interface="action-sheet" [compareWith]="compareFn">
+            <ion-option [value]="c.id" *ngFor="let c of customers" (ionSelect)="selectCustomer(c.id)">{{c.weixin}}</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" fixed>手机号码</ion-label>
+          <ion-input type="tel" placeholder="选择客户自动关联" [value]="orderInfo.customer.phone" name="phone" readonly></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" fixed>收货人</ion-label>
+          <ion-input type="text" placeholder="选择客户自动关联" required clearInput [value]="orderInfo.customer.receiver" name="receiver" readonly></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label color="primary" fixed>收货地址</ion-label>
+          <ion-textarea type="text" placeholder="选择客户自动关联" clearInput [value]="orderInfo.customer.address" name="address" rows="3"
+            readonly></ion-textarea>
+        </ion-item>
+      </ion-item-group>
+
+    </form>
+
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-buttons end>
+    <button ion-button color="secondary" icon-right small (click)="saveItem(form)">保存
+      <ion-icon name="checkmark"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-footer>

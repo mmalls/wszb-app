@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle end>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>客户</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar placeholder="请输入名称/收货人/手机任一搜索" (ionInput)="filterItems($event)"></ion-searchbar>
+  <ion-list>
+    <ion-list-header>
+      <span>一共有 {{ customers.length }} 名客户</span>
+      <button ion-button clear item-end icon-right (click)="addCustomer()">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-list-header>
+    <ion-card *ngFor="let c of customers" (tap)="tapItem(c.id);">
+      <ion-item>
+        <!--ion-avatar item-start>
+          <img src="assets/imgs/logo.png">
+        </ion-avatar-->
+        <h2><span>微信号：</span><span float-right>{{c.weixin}}</span></h2>
+        <h4>销售/单数:  <ion-badge float-right>￥{{c.orderSale.toFixed(2)}}/{{c.orderCount}}</ion-badge></h4>
+        <ion-grid>      
+              <p>电话：{{c.phone}}</p>
+              <p>收货人：{{c.receiver}}</p>
+              <p text-wrap>收货地址：{{c.address}}</p>
+        </ion-grid>
+      </ion-item>
+     
+    </ion-card>
+  </ion-list>
+</ion-content>

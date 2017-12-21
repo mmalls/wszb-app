@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle end>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>客户</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>录入进客户信息</ion-list-header>
+
+    <form #form="ngForm">
+      <ion-item>
+        <ion-label color="primary" fixed>微信号</ion-label>
+        <ion-input type="text" placeholder="请输入客户名称" required clearInput [(ngModel)]="customer.weixin" name="weixin"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" fixed>手机号码</ion-label>
+        <ion-input type="tel" placeholder="请输入手机号码" required clearInput [(ngModel)]="customer.phone" name="phone"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" fixed>收货人</ion-label>
+        <ion-input type="text" placeholder="请输入收货人" required clearInput [(ngModel)]="customer.receiver" name="receiver"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" fixed>收货地址</ion-label>
+        <ion-textarea type="text" placeholder="请输入收货地址" clearInput [(ngModel)]="customer.address" name="address" rows="3"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" fixed>邮编</ion-label>
+        <ion-input type="number" placeholder="请输入邮编" clearInput [(ngModel)]="customer.postCode" name="postCode"></ion-input>
+      </ion-item>
+
+    </form>
+
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-buttons end>
+    <button ion-button color="secondary" icon-right small (click)="saveItem(form)">保存
+      <ion-icon name="checkmark"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-footer>

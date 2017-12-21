@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle end>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>订单</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      <span>一共有 {{ orders.length }} 张订单</span>
+      <button ion-button clear item-end icon-right (click)="addOrder()">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>查询时间段</ion-label>
+      <ion-datetime cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" [(ngModel)]="beginDataStr" (ngModelChange)="changeDate($event)"></ion-datetime>
+      <ion-datetime cancelText="取消" doneText="确定" displayFormat="YYYY-MM-DD" [(ngModel)]="endDataStr" (ngModelChange)="changeDate($event)"></ion-datetime>
+    </ion-item>
+    <ion-card *ngFor="let o of orders" (tap)="tapItem(o.order.id);">
+      <ion-item>
+        <h2>
+          <span>利润/销售额：</span>
+          <ion-badge float-right>￥{{o.earning}}/￥{{o.order.totalSellPrice}}</ion-badge>
+        </h2>
+        <p *ngIf="o.order.discount > 0" >
+          <span>优惠：</span>
+          <span float-right>￥{{o.order.discount}}</span>
+        </p>
+        <p>
+          <span>成交日期：</span>
+          <span float-right>{{o.createdAt}}</span>
+        </p>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h4>名称</h4>
+            </ion-col>
+            <ion-col>
+              <h4>售价</h4>
+            </ion-col>
+            <ion-col>
+              <h4>进价</h4>
+            </ion-col>
+            <ion-col>
+              <h4>数量</h4>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngFor="let g of o.goods">
+            <ion-col>
+              <p>{{g.goodsName}}</p>
+            </ion-col>
+            <ion-col>
+              <p>￥{{g.sellPrice.toFixed(2)}}</p>
+            </ion-col>
+            <ion-col>
+              <p>￥{{g.purchasePrice.toFixed(2)}}</p>
+            </ion-col>
+            <ion-col>
+              <p>x{{g.quantity}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <h2>
+          <span>客户微信：</span>
+          <span float-right>{{o.customer.weixin}}</span>
+        </h2>
+        <ion-grid>
+          <p>
+            <span>客户手机号：</span>
+            <span >{{o.customer.phone}}</span>
+          </p>
+          <p>
+            <span>收货人：</span>
+            <span >{{o.customer.receiver}}</span>
+          </p>
+          <p>
+            <span>收货地址：</span>
+            <span >{{o.customer.address}}</span>
+          </p>
+        </ion-grid>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+</ion-content>
