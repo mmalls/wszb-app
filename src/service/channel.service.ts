@@ -53,7 +53,7 @@ export class ChannelService {
     }
     
     cis.sort((c1: ChannelInfo, c2: ChannelInfo): number => {
-      return c1.orderSale - c1.orderSale;
+      return c2.orderSale - c1.orderSale;
     })
     return cis;
   }

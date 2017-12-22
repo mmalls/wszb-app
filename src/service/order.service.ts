@@ -4,8 +4,8 @@ import Dexie from 'dexie';
 
 import { DBService } from './db.service';
 import { Customer } from './customer.service'
-import { Goods, GoodsService } from './goods.service'
-import { formatData } from './util'
+import { Goods } from './goods.service'
+import { formatDate } from './util'
 
 export interface Order {
   id?: number
@@ -117,7 +117,7 @@ export class OrderService {
       goods: goods,
       customer: customer,
       earning: order.totalSellPrice - purchasePrice - order.discount,
-      createdAt: formatData(order.createdAt, "yyyy-MM-dd hh:mm:ss")
+      createdAt: formatDate(order.createdAt, "yyyy-MM-dd hh:mm:ss")
     };
   }
 

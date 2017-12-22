@@ -1,20 +1,48 @@
 <ion-header>
   <ion-navbar hideBackButton="false">
-    <button ion-button menuToggle end >
+    <button ion-button menuToggle end>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>首页</ion-title>
   </ion-navbar>
+
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content>
+  <div padding>
+    <ion-segment [(ngModel)]="queryBy" (ionChange)="segmentChanged()">
+      <ion-segment-button value="week">
+        7天
+      </ion-segment-button>
+      <ion-segment-button value="month">
+        4周
+      </ion-segment-button>
+      <ion-segment-button value="year">
+        1年
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <ion-list>
+    <ion-item-divider color="light">
+      <span>合计</span>
+    </ion-item-divider>
+    <ion-item>
+      <div class="wrapper-grid">
+        <div *ngFor="let it of previews" class="grid-center">
+          <span class="span-number">{{it.value}}</span>
+          <br/>
+          <span class="span-desc">{{it.desc}}</span>
+        </div>
+      </div>
+    </ion-item>
+    <ion-item-divider color="light">
+      <span>单项(利润/销售额)</span>
+    </ion-item-divider>
+    <ion-item *ngFor="let it of items">
+      {{it.key}}
+      <button ion-button outline item-end (click)="listOrder(it.key)">
+        ￥{{it.totalIncoming.toFixed(2)}}/￥{{it.totalSellPrice.toFixed(2)}}</button>
+    </ion-item>
+  </ion-list>
 </ion-content>

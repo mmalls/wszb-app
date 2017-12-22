@@ -1,10 +1,10 @@
 
-export class DateExt  {
+export class DateExt {
 
     private now = new Date();
 
     constructor() {
-        
+
     }
 
     addDays(d: number): Date {
@@ -36,10 +36,14 @@ export class DateExt  {
 
         return this.now;
     }
+
+    getDate(): Date {
+        return this.now;
+    }
 }
 
 //js格式化时间 "yyyy-MM-dd hh:mm:ss" 
-export function formatData(d: Date, fmt: string): string {
+export function formatDate(d: Date, fmt: string): string {
     let o = {
         "M+": d.getMonth() + 1, //月份  
         "d+": d.getDate(), //日  

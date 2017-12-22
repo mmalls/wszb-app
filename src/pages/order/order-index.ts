@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { NavController, NavParams, AlertController, ToastController, ActionSheetController } from 'ionic-angular';
 
 import { Prompt } from '../../mixins/prompt'
-import { DateExt, formatData } from '../../service/util'
+import { DateExt, formatDate } from '../../service/util'
 
 import { OrderEditPage } from './order-edit';
 import { OrderInfo, OrderService } from '../../service/order.service'
@@ -47,8 +47,8 @@ export class OrderIndexPage extends Prompt {
       this.endDate = new Date("20" + monthStr + "/31 23:59:59");
     }
 
-    this.beginDataStr = formatData(this.beginDate, "yyyy-MM-dd");
-    this.endDataStr = formatData(this.endDate, "yyyy-MM-dd");
+    this.beginDataStr = formatDate(this.beginDate, "yyyy-MM-dd");
+    this.endDataStr = formatDate(this.endDate, "yyyy-MM-dd");
 
     this.orderService.getAll(this.beginDate, this.endDate).then(
       (data: OrderInfo[]) => {

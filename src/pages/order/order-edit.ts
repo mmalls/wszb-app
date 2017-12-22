@@ -62,9 +62,22 @@ export class OrderEditPage extends Prompt {
 
         this.orderService.getGoods().then((data: Goods[]) => {
             this.goods = data
+
+            let customerIdStr = this.navParams.get("customerId");
+            if (customerIdStr != undefined && customerIdStr != "") {
+                this.orderInfo.order.customId = parseInt(customerIdStr);
+                this.selectCustomer(this.orderInfo.order.customId);
+            }
         });
+
         this.orderService.getCustomers().then((data: Customer[]) => {
             this.customers = data
+
+            let goodsIdStr = this.navParams.get("goodsId");
+            if (goodsIdStr != undefined && goodsIdStr != "") {
+                this.orderInfo.goods[0].id = parseInt(goodsIdStr);
+                this.selectGoods(0, this.orderInfo.goods[0].id);
+            }
         });
     }
 

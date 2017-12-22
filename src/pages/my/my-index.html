@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle end>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>我的</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-divider color="light">
+      <span>备份</span>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-label color="primary" stacked>备份地址</ion-label>
+      <ion-input type="text" required clearInput [(ngModel)]="serverAddr" name="serverAddr"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary">操作</ion-label>
+      <button ion-button outline item-end (click)="backupData()"> 备份 
+        <ion-icon name="arrow-round-up"></ion-icon>
+      </button>
+      <button ion-button outline item-end (click)="recoveryData()"> 恢复 
+        <ion-icon name="arrow-round-down"></ion-icon>
+      </button>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

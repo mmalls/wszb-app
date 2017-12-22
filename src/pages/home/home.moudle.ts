@@ -4,6 +4,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { HomePage } from './home';
 
 import { DBService } from '../../service/db.service';
+import { StatsService } from '../../service/stats.service';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,10 @@ import { DBService } from '../../service/db.service';
     HomePage
   ],
   providers: [
-    DBService
+    DBService,
+    StatsService
   ]
 })
-export class HomeModule {}
+export class HomeModule {
+
+}

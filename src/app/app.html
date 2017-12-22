@@ -6,16 +6,16 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <button ion-item >
+      <button ion-item (click)="menuJump('my')">
         我的
       </button>
-      <button ion-item >
+      <button ion-item (click)="menuJump('lock')">
         锁屏
       </button>
-      <button ion-item >
+      <button ion-item (click)="menuJump('about')">
         关于
       </button>
     </ion-list>
   </ion-content>
 </ion-menu>
-<ion-nav #content [root]="rootPage" swipeBackEnabled="false"></ion-nav>
+<ion-nav #content [root]="rootPage" swipeBackEnabled="true"></ion-nav>

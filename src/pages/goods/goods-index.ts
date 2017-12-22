@@ -3,6 +3,7 @@ import { NavController, AlertController, ToastController, ActionSheetController 
 
 import { Prompt } from '../../mixins/prompt'
 import { GoodsEditPage } from './goods-edit'
+import { OrderEditPage } from '../order/order-edit';
 
 import { GoodsInfo, GoodsService, Goods } from '../../service/goods.service'
 
@@ -51,7 +52,7 @@ export class GoodsIndexPage extends Prompt {
           text: '下单',
           icon: 'cart',
           handler: () => {
-            //this.editItem(id);
+            this.navCtrl.push(OrderEditPage, {"goodsId": id});
           }
         },
         {

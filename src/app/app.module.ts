@@ -9,6 +9,7 @@ import { OrderModule } from '../pages/order/order.moudle';
 import { CustomerModule } from '../pages/customer/customer.moudle';
 import { GoodsModule } from '../pages/goods/goods.moudle'
 import { ChannelModule } from '../pages/channel/channel.moudle'
+import { MyModule } from '../pages/my/my.moudle'
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -27,6 +28,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CustomerModule,
     GoodsModule,
     ChannelModule,
+    MyModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
