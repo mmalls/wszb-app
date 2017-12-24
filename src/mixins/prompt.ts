@@ -10,7 +10,7 @@ export class Prompt {
     deleteItem(id: number, msg?: string) {
         let confirm = this.alertCtrl.create({
             title: '确认是否删除？',
-            message: '删除时会检查是否存在关联'+msg+'，一旦删除不可恢复！',
+            message: '删除时会检查是否存在关联' + msg + '，一旦删除不可恢复！',
             buttons: [
                 {
                     text: '取消',
@@ -50,7 +50,7 @@ export class Prompt {
         });
 
         toast.onDidDismiss(() => {
-            console.info('Toast onDidDismiss()'); 
+            console.info('Toast onDidDismiss()');
         });
         toast.present();
         if (back) {

@@ -31,6 +31,9 @@
           <ion-select placeholder="请选择购买商品" required [(ngModel)]="g.goodsId" name="goodsId_i" interface="action-sheet" [compareWith]="compareFn">
             <ion-option [value]="u.id" *ngFor="let u of goods" (ionSelect)="selectGoods(i, u.id)">{{u.name}}</ion-option>
           </ion-select>
+          <button ion-button clear item-end (click)="addGoods()">
+            <ion-icon name="add-circle"></ion-icon>
+          </button>
         </ion-item>
 
         <ion-item>
@@ -82,9 +85,13 @@
         <ion-item-divider color="light">客户信息</ion-item-divider>
         <ion-item>
           <ion-label color="primary" fixed>客户名称</ion-label>
-          <ion-select placeholder="请选择客户" required [(ngModel)]="orderInfo.order.customId" name="customId" interface="action-sheet" [compareWith]="compareFn">
+          <ion-select placeholder="请选择客户" required [(ngModel)]="orderInfo.order.customId" name="customId" interface="action-sheet"
+            [compareWith]="compareFn">
             <ion-option [value]="c.id" *ngFor="let c of customers" (ionSelect)="selectCustomer(c.id)">{{c.weixin}}</ion-option>
           </ion-select>
+          <button ion-button clear item-end (click)="addCustomer()">
+              <ion-icon name="add-circle"></ion-icon>
+            </button>
         </ion-item>
 
         <ion-item>

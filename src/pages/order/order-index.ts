@@ -50,6 +50,10 @@ export class OrderIndexPage extends Prompt {
     this.beginDataStr = formatDate(this.beginDate, "yyyy-MM-dd");
     this.endDataStr = formatDate(this.endDate, "yyyy-MM-dd");
 
+    this.listOrders();
+  }
+
+  listOrders() {
     this.orderService.getAll(this.beginDate, this.endDate).then(
       (data: OrderInfo[]) => {
         this.orders = data;
@@ -61,7 +65,9 @@ export class OrderIndexPage extends Prompt {
   }
 
   changeDate(evt: any) {
-    console.log("xxxx");
+      this.beginDate = new Date(this.beginDataStr.replace(/-/g, "/") + " 00:00:00");
+      this.endDate = new Date(this.endDataStr.replace(/-/g, "/") + " 23:59:59");
+      this.listOrders();
   }
 
   async doDeleteItem(id: number) {

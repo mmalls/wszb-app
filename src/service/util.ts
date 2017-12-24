@@ -79,3 +79,11 @@ export function uuid() {
     return uuid;
 }
 
+export function toNumber(num: any) :number {
+    let ret = parseFloat(num);
+    if (isNaN(ret)) {
+        return 0;
+    }
+    return ret;
+}
+

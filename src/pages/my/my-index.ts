@@ -4,6 +4,7 @@ import { NavController, AlertController, ToastController, ActionSheetController 
 
 
 import { StatsService } from '../../service/stats.service';
+import { HttpErrorResponse } from '@angular/common/http/src/response';
 
 @Component({
   selector: 'page-my-index',
@@ -25,8 +26,21 @@ export class MyIndexPage {
     console.log('toggleChanged', bind);
   }
 
-  backupData() {
-
+  async backupData() {
+    console.log('backupData');
+    let body = await this.statsService.exportDatas();
+    this.http.post(this.serverAddr + "/rest/v1/sync", body).subscribe(
+      (v: any) => {
+        this.showToast("备份数据成功");
+      },
+      (err: HttpErrorResponse) => {
+        if (err.status == 200) {
+          this.showToast("备份数据成功");
+        } else {
+          this.showToast("备份数据失败");
+        }
+      }
+    );
   }
 
   async recoveryData() {

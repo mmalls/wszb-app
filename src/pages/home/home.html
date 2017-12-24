@@ -25,6 +25,14 @@
 
   <ion-list>
     <ion-item-divider color="light">
+      <span>利润趋势</span>
+    </ion-item-divider>
+    <ion-item>
+      <div class="bars">
+        <canvas baseChart [datasets]="barChartData" [options]="barChartOptions" [labels]="barChartLabels" [legend]="true" chartType="bar"></canvas>
+      </div>
+    </ion-item>
+    <ion-item-divider color="light">
       <span>合计</span>
     </ion-item-divider>
     <ion-item>

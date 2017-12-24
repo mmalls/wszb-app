@@ -1,4 +1,16 @@
 page-home {
+  .bars {
+    padding: 5px;
+    margin: 5px;
+    display: block;
+    text-align: center;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #f00;
+    border-radius: 10px;
+    background-color: #ffffff;
+  }
+  
   .grid-center {
     padding: 5px;
     margin: 5px;

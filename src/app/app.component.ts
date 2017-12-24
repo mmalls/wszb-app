@@ -1,5 +1,5 @@
 import { Component, ViewChild, Input } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -16,7 +16,8 @@ export class MyApp {
 
   constructor(public platform: Platform,
     public statusBar: StatusBar,
-    public splashScreen: SplashScreen) {
+    public splashScreen: SplashScreen,
+    public menuCtrl: MenuController) {
 
     this.initializeApp();
   }
@@ -37,5 +38,6 @@ export class MyApp {
         this.nav.push(MyIndexPage);
         break;
     }
+    this.menuCtrl.close();
   }
 }

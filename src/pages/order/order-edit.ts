@@ -7,6 +7,9 @@ import { Prompt } from '../../mixins/prompt'
 import { OrderInfo, OrderService, OrderGoods } from '../../service/order.service'
 import { Customer } from '../../service/customer.service'
 import { Goods } from '../../service/goods.service'
+import { GoodsEditPage } from '../goods/goods-edit';
+import { CustomerEditPage } from '../customer/customer-edit';
+import { toNumber } from '../../service/util';
 
 @Component({
     selector: 'page-order-edit',
@@ -95,6 +98,36 @@ export class OrderEditPage extends Prompt {
             return
         }
 
+        this.orderInfo.order.discount = toNumber(this.orderInfo.order.discount);
+        this.orderInfo.order.totalSellPrice = toNumber(this.orderInfo.order.totalSellPrice);
+
+        if (this.orderInfo.order.discount < 0) {
+            this.showToast("优惠必须大于或等于0", false);
+            return
+        }
+
+        if (this.orderInfo.order.totalSellPrice < 0) {
+            this.showToast("总售价必须大于或等于0", false);
+            return
+        }
+
+        for (let g of this.orderInfo.goods) {
+            if (g.quantity <= 0) {
+                this.showToast("购买数量必须大于0", false);
+                return
+            }
+
+            if (g.purchasePrice <= 0) {
+                this.showToast("进货价必须大于0", false);
+                return
+            }
+
+            if (g.sellPrice <= 0) {
+                this.showToast("零售价必须大于0", false);
+                return
+            }
+        }
+
         // update
         if (this.orderInfo.order.id != undefined) {
             try {
@@ -153,6 +186,9 @@ export class OrderEditPage extends Prompt {
         console.log("changeQuantity", index);
         this.orderInfo.order.totalSellPrice = 0;
         this.orderInfo.goods.forEach((g: OrderGoods) => {
+            g.purchasePrice = toNumber(g.purchasePrice);
+            g.quantity = toNumber(g.quantity);
+            g.sellPrice = toNumber(g.sellPrice);
             this.orderInfo.order.totalSellPrice += g.sellPrice * g.quantity;
         });
     }
@@ -184,5 +220,13 @@ export class OrderEditPage extends Prompt {
 
     compareFn(cid: number, cid2: number): boolean {
         return cid == cid2;
+    }
+
+    addGoods() {
+        this.navCtrl.push(GoodsEditPage);
+    }
+
+    addCustomer() {
+        this.navCtrl.push(CustomerEditPage);
     }
 }

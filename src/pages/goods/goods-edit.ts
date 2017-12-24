@@ -6,7 +6,8 @@ import { Prompt } from '../../mixins/prompt'
 
 import { GoodsInfo, GoodsService, Goods } from '../../service/goods.service'
 import { Channel, ChannelService } from '../../service/channel.service'
-
+import { ChannelEditPage } from '../channel/channel-edit';
+import { toNumber } from '../../service/util';
 
 @Component({
     selector: 'page-goods-edit',
@@ -64,10 +65,19 @@ export class GoodsEditPage extends Prompt {
             this.showToast("请输入完整信息", false);
             return
         }
-        
+        this.goods.purchasePrice = toNumber( this.goods.purchasePrice);
+        this.goods.sellPrice = toNumber(this.goods.sellPrice);
+        if (this.goods.purchasePrice <= 0) {
+            this.showToast("进货价必须大于0", false);
+            return
+        }
+        if (this.goods.sellPrice <= 0) {
+            this.showToast("零售价必须大于0", false);
+            return
+        }
+    
         this.goods.updatedAt = new Date();
-        this.goods.purchasePrice = parseFloat( this.goods.purchasePrice.toString());
-        this.goods.sellPrice = parseFloat( this.goods.sellPrice.toString());
+    
         // update
         if (this.goods.id != undefined) {
             try {
@@ -91,5 +101,9 @@ export class GoodsEditPage extends Prompt {
 
     compareFn(cid: number, cid2: number): boolean {
         return cid == cid2;
+    }
+
+    addChannel() {
+        this.navCtrl.push(ChannelEditPage);
     }
 }
