@@ -9,9 +9,9 @@
       <button ion-item (click)="menuJump('my')">
         我的
       </button>
-      <button ion-item (click)="menuJump('lock')">
-        锁屏
-      </button>
+        <button ion-item (click)="menuJump('lock')" *ngIf="isOpenLock">
+          锁屏
+        </button>
       <button ion-item (click)="menuJump('about')">
         关于
       </button>

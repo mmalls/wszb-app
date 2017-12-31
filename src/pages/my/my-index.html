@@ -10,6 +10,19 @@
 <ion-content>
   <ion-list>
     <ion-item-divider color="light">
+      <span>锁屏</span>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-label>开启锁屏</ion-label>
+      <ion-toggle [(ngModel)]="openlock" (ionChange)="toggleChanged()"></ion-toggle>
+    </ion-item>
+
+    <a ion-item (click)="settingPwd()" *ngIf="openlock">
+        设置密码 <span *ngIf="isExistedPwd">(已存在旧密码)</span>
+    </a>
+
+    <ion-item-divider color="light">
       <span>备份</span>
     </ion-item-divider>
 
@@ -20,10 +33,10 @@
 
     <ion-item>
       <ion-label color="primary">操作</ion-label>
-      <button ion-button outline item-end (click)="backupData()"> 备份 
+      <button ion-button outline item-end (click)="backupData()"> 备份
         <ion-icon name="arrow-round-up"></ion-icon>
       </button>
-      <button ion-button outline item-end (click)="recoveryData()"> 恢复 
+      <button ion-button outline item-end (click)="recoveryData()"> 恢复
         <ion-icon name="arrow-round-down"></ion-icon>
       </button>
     </ion-item>

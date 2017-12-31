@@ -13,19 +13,13 @@
 
     <form #form="ngForm">
 
-      <ion-item>
-        <ion-label color="primary">购买商品件数</ion-label>
-        <ion-input type="number" required readonly [(ngModel)]="goodsNumber" name="goodsNumber"></ion-input>
-        <button ion-button clear item-end icon-left (click)="changeNumber('sub')">
-          <ion-icon name="remove"></ion-icon>
-        </button>
-        <button ion-button clear item-end icon-right (click)="changeNumber('add')">
-          <ion-icon name="add"></ion-icon>
-        </button>
-      </ion-item>
-
       <ion-item-group *ngFor="let g of orderInfo.goods ; index as i">
-        <ion-item-divider color="light">商品 {{g.goodsName}}</ion-item-divider>
+        <ion-item-divider color="light">商品 {{g.goodsName}}
+          <button ion-button clear item-end icon-right *ngIf="i != 0" (click)="removeBuy(i)">
+            不想购买了
+            <ion-icon name="remove-circle"></ion-icon>
+          </button>
+        </ion-item-divider>
         <ion-item>
           <ion-label color="primary" fixed>商品名称</ion-label>
           <ion-select placeholder="请选择购买商品" required [(ngModel)]="g.goodsId" name="goodsId_i" interface="action-sheet" [compareWith]="compareFn">
@@ -64,7 +58,12 @@
       </ion-item-group>
 
       <ion-item-group>
-        <ion-item-divider color="light">订单金额</ion-item-divider>
+        <ion-item-divider color="light">订单金额
+          <button ion-button clear item-end icon-right (click)="addBuy()">
+            再购买其它的商品
+            <ion-icon name="add-circle"></ion-icon>
+          </button>
+        </ion-item-divider>
         <ion-item>
           <ion-label color="primary" fixed>总售价</ion-label>
           <ion-input type="number" required placeholder="" [(ngModel)]="orderInfo.order.totalSellPrice" name="totalSellPrice"></ion-input>
@@ -90,8 +89,8 @@
             <ion-option [value]="c.id" *ngFor="let c of customers" (ionSelect)="selectCustomer(c.id)">{{c.weixin}}</ion-option>
           </ion-select>
           <button ion-button clear item-end (click)="addCustomer()">
-              <ion-icon name="add-circle"></ion-icon>
-            </button>
+            <ion-icon name="add-circle"></ion-icon>
+          </button>
         </ion-item>
 
         <ion-item>

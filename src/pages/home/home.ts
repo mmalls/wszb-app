@@ -86,7 +86,7 @@ export class HomePage  {
       }
       this.barChartLabels= labels;
       this.barChartData = [
-        { data: d1, label: '利润' },
+        { data: d1, label: '利润',},
         { data: d2, label: '销售额' },
       ];
     });

@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <span *ngIf="ltype == 'recorder'">设置锁屏密码</span>
+      <span *ngElse>输入锁屏密码</span>
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">取消</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p text-center *ngIf="ltype == 'recorder'">绘制密码（至少4个节点以上）</p>
+  <p text-center *ngElse>绘制密码</p>
+  <gesture-password style="height: 400px;" [(ngModel)]="pwd" [type]="ltype" [options]="options" (error)="onError($event)"
+    (checked)="onChecked($event)" (beforeRepeat)="onBeforeRepeat($event)" (afterRepeat)="onAfterRepeat($event)"></gesture-password>
+</ion-content>

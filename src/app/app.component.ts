@@ -14,11 +14,13 @@ export class MyApp {
 
   @Input() rootPage: any = TabsPage;
 
+  @Input() isOpenLock: boolean = false;
+
   constructor(public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
     public menuCtrl: MenuController) {
-
+      
     this.initializeApp();
   }
 

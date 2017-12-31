@@ -40,8 +40,6 @@ export class OrderEditPage extends Prompt {
         },
     };
 
-    @Input() goodsNumber: number = 1;
-
     @Input() goods = new Array<Goods>();
     @Input() customers = new Array<Customer>();
 
@@ -192,29 +190,21 @@ export class OrderEditPage extends Prompt {
             this.orderInfo.order.totalSellPrice += g.sellPrice * g.quantity;
         });
     }
+    
+    addBuy() {
+        this.orderInfo.goods.push({
+            orderId: 0,
+            goodsId: 0,
+            goodsName: "",
+            sellPrice: 0,
+            purchasePrice: 0,
+            quantity: 0
+        });
+    }
 
-    changeNumber(type: string) {
-        if (type == 'sub') {
-            if (this.goodsNumber > 1) {
-                this.goodsNumber--;
-            }
-        } else if (type == 'add') {
-            this.goodsNumber++;
-        }
-
-        let len = this.orderInfo.goods.length;
-        console.log("changeNumber", this.goodsNumber, len);
-        if (this.goodsNumber > len) {
-            this.orderInfo.goods.push({
-                orderId: 0,
-                goodsId: 0,
-                goodsName: "",
-                sellPrice: 0,
-                purchasePrice: 0,
-                quantity: 0
-            });
-        } else if (this.goodsNumber < len) {
-            this.orderInfo.goods.pop();
+    removeBuy(idx: number) {
+        if (idx < this.orderInfo.goods.length) {
+            this.orderInfo.goods = this.orderInfo.goods.splice(idx, idx + 1);
         }
     }
 
